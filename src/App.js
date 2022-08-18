@@ -11,6 +11,7 @@ const App = () => {
 
   const [searchField, setSearchField] = useState('');
   const [profs, setProfs] = useState([]);
+  const [filteredProfs, setFilterProfs] = useState(profs);
 
   
   useEffect(() => { 
@@ -21,12 +22,16 @@ const App = () => {
 
   }, []);
 
+  useEffect(() => {
+    const newFilterProfs = profs.filter((prof) => {
+      return prof.name.toLocaleLowerCase().includes(searchField);
+    });
+    setFilterProfs(newFilterProfs);
+  }, [profs, searchField]);
 
 
-  const filteredProfs = profs.filter((prof) => {
-    return prof.name.toLocaleLowerCase().includes(searchField);
 
-  });
+  
    
 
 
